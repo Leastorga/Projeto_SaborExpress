@@ -6,12 +6,11 @@ namespace SaborExpress.Controllers
 {
     public class HomeController : Controller
     {
-        
+
         public IActionResult Index() // Está retornando o view ao acessar a página, isso se deve a interface IActionResult
         {
             return View();
         }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
