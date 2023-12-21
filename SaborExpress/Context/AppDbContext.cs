@@ -1,6 +1,15 @@
-﻿namespace SaborExpress.Context
+﻿using Microsoft.EntityFrameworkCore;
+using SaborExpress.Models;
+
+namespace SaborExpress.Context
 {
-    public class AppDbContext
+    public class AppDbContext : DbContext
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
+        {
+        }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Snack> Snacks { get; set; }    
+
     }
 }
