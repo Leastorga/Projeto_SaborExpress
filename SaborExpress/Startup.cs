@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SaborExpress.Context;
+using SaborExpress.Repositories;
+using SaborExpress.Repositories.Interfaces;
 
 namespace SaborExpress;
 public class Startup
@@ -15,7 +17,12 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+        services.AddTransient<ISnackRepository, SnackRepository>();
+        services.AddTransient<ICategoryRepository, CategoryRepository>();
         services.AddControllersWithViews();
+
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
