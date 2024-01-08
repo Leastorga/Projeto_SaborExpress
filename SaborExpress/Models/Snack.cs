@@ -29,7 +29,7 @@ namespace SaborExpress.Models
         [Display(Name="Price")]
         [Column(TypeName ="decimal(10,2)")]
         [Range(1,999.99,ErrorMessage = "The price must be between 1 and 999.99")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         [Display(Name="Normal Image Path")]
         [StringLength(200, ErrorMessage ="The {0} must have of {1} characteres ")]
