@@ -9,6 +9,7 @@ namespace SaborExpress.Controllers
 
         public IActionResult Index() // Está retornando o view ao acessar a página, isso se deve a interface IActionResult
         {
+            TempData["Name"] = "Lele";
             return View();
         }
 

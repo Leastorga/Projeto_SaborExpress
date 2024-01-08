@@ -14,7 +14,15 @@ namespace SaborExpress.Controllers
 
         public IActionResult List()
         {
+            ViewData["Title"] = "All snacks";
+            ViewData["Date"] = DateTime.Now;
+
             var snacks = _snackRepository.Snacks;
+
+            var totalSnacks = snacks.Count();
+            ViewBag.Total = "Total of snacks";
+            ViewBag.TotalSnacks= totalSnacks;
+
             return View(snacks);
         }
     }

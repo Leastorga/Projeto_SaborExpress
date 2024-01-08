@@ -1,9 +1,15 @@
 ﻿@model IEnumerable<SaborExpress.Models.Snack>
 <div>
-    <h2>Todos os Lanches </h2>
+    <h2>@ViewData["Title"]</h2>
 </div>
+<h2>@ViewData["Date"]</h2>
 
-@foreach(var snack in Model)
+<hr />
+<h3>@ViewBag.Total @ViewBag.TotalSnacks</h3>
+<hr />
+<h3>@TempData["Name"];</h3>
+
+@foreach (var snack in Model)
 {
     <div>
         <h4> @snack.Name</h4>
