@@ -1,83 +1,13 @@
 ﻿@model IEnumerable<SaborExpress.Models.Snack>
+<div>
+    <h2>Todos os Lanches </h2>
+</div>
 
-@{
-    ViewData["Title"] = "List";
+@foreach(var snack in Model)
+{
+    <div>
+        <h4> @snack.Name</h4>
+        <p><img src="@snack.ImageUrl" /></p>
+        <h3>Price : @snack.Price.ToString("c")</h3>
+    </div>
 }
-
-<h1>List</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShortDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LongDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ThumbnailImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsFavoriteSnack)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InStock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShortDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LongDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThumbnailImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsFavoriteSnack)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InStock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SnackId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SnackId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SnackId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
