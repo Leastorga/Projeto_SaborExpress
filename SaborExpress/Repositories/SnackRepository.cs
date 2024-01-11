@@ -23,3 +23,8 @@ namespace SaborExpress.Repositories
         }
     }
 }
+// Injetamos as dependências do contexto através do construtor
+//Acessamos a tabela Snacks e incluimos sua categoria no resultado da consulta
+// Acessamos a tabela FavoriteSnack onde o lanche for o preferido e inclui a categoria na consulta
+// Retornamos o lanche com o Id consultado
+
