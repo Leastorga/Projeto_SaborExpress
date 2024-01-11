@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SaborExpress.Repositories.Interfaces;
+using SaborExpress.ViewModels;
 
 namespace SaborExpress.Controllers
 {
@@ -14,16 +15,12 @@ namespace SaborExpress.Controllers
 
         public IActionResult List()
         {
-            ViewData["Title"] = "All snacks";
-            ViewData["Date"] = DateTime.Now;
-
-            var snacks = _snackRepository.Snacks;
-
-            var totalSnacks = snacks.Count();
-            ViewBag.Total = "Total of snacks";
-            ViewBag.TotalSnacks= totalSnacks;
-
-            return View(snacks);
+            //var snacks = _snackRepository.Snacks;
+            //return View(snacks);
+            var snacksListViewModel = new SnackListViewModel();
+            snacksListViewModel.Snacks = _snackRepository.Snacks;
+            snacksListViewModel.CurrentCategory = "Current Category"; 
+            return View(snacksListViewModel);
         }
     }
 }
