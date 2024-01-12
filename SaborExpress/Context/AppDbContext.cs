@@ -10,5 +10,6 @@ namespace SaborExpress.Context
         }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Snack> Snacks { get; set; }    
+        public DbSet<CartPurchaseItem> CartPurchaseItems { get; set; }
     }
 }
