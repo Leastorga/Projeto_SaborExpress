@@ -16,7 +16,7 @@ namespace SaborExpress.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SnackId = table.Column<int>(type: "int", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    CartPurchaseId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
+                    ShoppingCartId = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true)
                 },
                 constraints: table =>
                 {
