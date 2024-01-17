@@ -1,4 +1,5 @@
-﻿using SaborExpress.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using SaborExpress.Context;
 
 namespace SaborExpress.Models
 {
@@ -67,6 +68,30 @@ namespace SaborExpress.Models
             }
             _context.SaveChanges();
             return localQuantity;
+        }
+        public List<CartPurchaseItem> GetCartPurchaseItems()
+        {
+            return CartPurchaseItems ?? (
+                CartPurchaseItems = _context.CartPurchaseItems
+                .Where(c => c.ShoppingCartId == ShoppingCartId)
+                .Include(s => s.Snack)
+                .ToList()); 
+        }
+        public void CleanCart()
+        {
+            var cartItems = _context.CartPurchaseItems
+                .Where(cart =>
+                cart.ShoppingCartId == ShoppingCartId);
+            _context.CartPurchaseItems.RemoveRange(cartItems);
+            _context.SaveChanges();
+        }
+
+        public decimal GetTotalShoppingCart()
+        {
+            var Total = _context.CartPurchaseItems
+                .Where(c => c.ShoppingCartId == ShoppingCartId)
+                .Select(c => c.Snack.Price * c.Quantity).Sum();
+            return Total;
         }
     }
 }
