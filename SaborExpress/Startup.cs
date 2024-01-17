@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SaborExpress.Context;
+using SaborExpress.Models;
 using SaborExpress.Repositories;
 using SaborExpress.Repositories.Interfaces;
 
@@ -20,11 +21,12 @@ public class Startup
 
         services.AddTransient<ISnackRepository, SnackRepository>();
         services.AddTransient<ICategoryRepository, CategoryRepository>();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddScoped(sp => ShoppingCart.GetCart(sp));
         services.AddControllersWithViews();
 
         services.AddMemoryCache(); // Estamos registrando os Middlewares
         services.AddSession();
-        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); 
 
 
     }

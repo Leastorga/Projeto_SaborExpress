@@ -13,7 +13,7 @@ namespace SaborExpress.Models
         public string ShoppingCartId { get; set; }
         public List<CartPurchaseItem> CartPurchaseItems { get; set; }
 
-        public static ShoppingCart GetShopping(IServiceProvider services)
+        public static ShoppingCart GetCart(IServiceProvider services)
         {
             //Define uma sessão
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
