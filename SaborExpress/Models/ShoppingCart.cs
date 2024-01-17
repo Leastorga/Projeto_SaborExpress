@@ -1,5 +1,4 @@
 ﻿using SaborExpress.Context;
-using System.Security.Cryptography.X509Certificates;
 
 namespace SaborExpress.Models
 {
@@ -31,7 +30,43 @@ namespace SaborExpress.Models
         public void AddToCart(Snack snack)
         {
             var cartPurchaseItem = _context.CartPurchaseItems.SingleOrDefault(s => s.Snack.SnackId == snack.SnackId && s.ShoppingCartId == ShoppingCartId);
-        }
+            if (cartPurchaseItem == null)
+            {
+                cartPurchaseItem = new CartPurchaseItem
+                {
+                    ShoppingCartId = ShoppingCartId,
+                    Snack = snack,
+                    Quantity = 1
+                };
+                _context.CartPurchaseItems.Add(cartPurchaseItem);
+            }
+            else
+            {
+                cartPurchaseItem.Quantity++;
+            }
+            _context.SaveChanges();
 
+        }
+        public int CartRemover(Snack snack)
+        {
+            var cartPurchaseItem = _context.CartPurchaseItems.SingleOrDefault(
+                s => s.Snack.SnackId == snack.SnackId && s.ShoppingCartId == ShoppingCartId);
+            var localQuantity = 0;
+
+            if(cartPurchaseItem != null)
+            {
+                if(cartPurchaseItem.Quantity > 1)
+                {
+                    cartPurchaseItem.Quantity--;
+                    localQuantity = cartPurchaseItem.Quantity;
+                }
+                else
+                {
+                    _context.CartPurchaseItems.Remove(cartPurchaseItem);
+                }
+            }
+            _context.SaveChanges();
+            return localQuantity;
+        }
     }
 }
