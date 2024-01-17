@@ -30,12 +30,21 @@ namespace SaborExpress.Controllers
         public RedirectToActionResult AddItemToShoppingcart(int snackId)
         {
             var selectedItem = _snackRepository.Snacks.FirstOrDefault(p => p.SnackId == snackId);
-            if(selectedItem != null)
+            if (selectedItem != null)
             {
                 _shoppingCart.AddToCart(selectedItem);
             }
             return RedirectToAction("Index");
         }
 
+        public RedirectToActionResult RemoveItemToShoppingcart(int snackId)
+        {
+            var selectedItem = _snackRepository.Snacks.FirstOrDefault(p => p.SnackId == snackId);
+            if (selectedItem != null)
+            {
+                _shoppingCart.CartRemover(selectedItem);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
