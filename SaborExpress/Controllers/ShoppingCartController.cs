@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SaborExpress.Models;
 using SaborExpress.Repositories.Interfaces;
+using SaborExpress.ViewModels;
 
 namespace SaborExpress.Controllers
 {
@@ -17,11 +18,14 @@ namespace SaborExpress.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var items = _shoppingCart.GetCartPurchaseItems();
+            _shoppingCart.CartPurchaseItems = items;
+            var shoppingCartVM = new ShoppingCartViewModel {
+                ShoppingCart = _shoppingCart,
+                TotalShoppingCart = _shoppingCart.GetTotalShoppingCart()    
+            };
+            return View(shoppingCartVM);
         }
-
-
-
 
     }
 }
