@@ -1,0 +1,57 @@
+﻿@model ShoppingCartViewModel
+
+<div class="Container">
+    <div class="row">
+
+        <img src="~/Images/iconCart.png" />
+
+        <div>
+            <h4>Your shopping cart: </h4>
+        </div>
+
+        <table class="table table-bordered table-striped">
+
+            <thead>
+                <tr>
+                    <th>Quantity</th>
+                    <th>Snack</th>
+                    <th class="text-right">Price</th>
+                    <th class="text-right">Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model.ShoppingCart.CartPurchaseItems)
+                {
+                    <tr>
+                        <td class="text-center">@item.Quantity</td>
+                        <td class="text-left">@item.Snack.Name</td>
+                        <td class="text-right">@item.Snack.Price.ToString("c")</td>
+                        <td class="text-right">
+                            <a asp-controller="ShoppingCart" asp-action="RemoveItemToShoppingcart" asp-route-snackId="@item.Snack.SnackId"><img src="~/Images/iconDump.png" />
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <td colspan="3" class="text-right">Total:</td>
+                    <td class="text-right">
+                        @Model.TotalShoppingCart.ToString("c")
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div class="text-right">
+           <div class="btn-group">
+               <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Close Order</a>
+                &nbsp;&nbsp;&nbsp;
+               <a class="btn btn-primary" asp-controller="Snack" asp-action="List">Keep buying</a>
+           </div>
+        </div>
+    </div>
+</div>
