@@ -14,12 +14,12 @@ namespace SaborExpress.Components
         }
         public IViewComponentResult Invoke()
         {
-            //var items = _shoppingCart.GetCartPurchaseItems();
+            var items = _shoppingCart.GetCartPurchaseItems();
 
-            var items = new List<CartPurchaseItem>() {
-                new CartPurchaseItem(),
-                new CartPurchaseItem()
-            };
+            //var items = new List<CartPurchaseItem>() {
+            //    new CartPurchaseItem(),
+            //    new CartPurchaseItem()
+            //};
 
             _shoppingCart.CartPurchaseItems = items;
             var shoppingCartVM = new ShoppingCartViewModel
