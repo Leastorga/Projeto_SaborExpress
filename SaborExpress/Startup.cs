@@ -33,7 +33,7 @@ public class Startup
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {          
+    {
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
@@ -53,6 +53,11 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
+
+            endpoints.MapControllerRoute(
+               name: "filterCategory",
+               pattern: "Snack/{action}/{category?}",
+               defaults: new {Controller = "Snack", action = "List"});
             endpoints.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
