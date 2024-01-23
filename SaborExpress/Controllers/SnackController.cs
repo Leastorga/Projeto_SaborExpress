@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SaborExpress.Models;
 using SaborExpress.Repositories.Interfaces;
 using SaborExpress.ViewModels;
+
 
 namespace SaborExpress.Controllers
 {
@@ -13,13 +15,35 @@ namespace SaborExpress.Controllers
             _snackRepository = snackRepository;
         }
 
-        public IActionResult List()
+        public IActionResult List(string category)
         {
-            //var snacks = _snackRepository.Snacks;
-            //return View(snacks);
-            var snacksListViewModel = new SnackListViewModel();
-            snacksListViewModel.Snacks = _snackRepository.Snacks;
-            snacksListViewModel.CurrentCategory = "Current Category"; 
+            IEnumerable<Snack> snacks;
+            string currentCategory = string.Empty;
+            if (string.IsNullOrEmpty(category))
+            {
+                snacks = _snackRepository.Snacks.OrderBy(x => x.SnackId);
+                currentCategory = "All snacks";
+            }
+            else
+            {
+            
+                if (string.Equals("Normal", category, StringComparison.OrdinalIgnoreCase))
+                {
+                    snacks = _snackRepository.Snacks.Where(x => x.Category.CategoryName.Equals("Normal"))
+                        .OrderBy(x => x.Name);
+                }
+                else
+                {
+                    snacks = _snackRepository.Snacks.Where(x => x.Category.CategoryName.Equals("Natural"))
+                        .OrderBy(x => x.Name);
+                }
+                currentCategory = category;
+            }
+            var snacksListViewModel = new SnackListViewModel
+            {
+                Snacks = snacks,
+                CurrentCategory = currentCategory
+            };
             return View(snacksListViewModel);
         }
     }
