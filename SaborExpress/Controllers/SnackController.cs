@@ -19,6 +19,7 @@ namespace SaborExpress.Controllers
         {
             IEnumerable<Snack> snacks;
             string currentCategory = string.Empty;
+
             if (string.IsNullOrEmpty(category))
             {
                 snacks = _snackRepository.Snacks.OrderBy(x => x.SnackId);
@@ -26,17 +27,21 @@ namespace SaborExpress.Controllers
             }
             else
             {
-            
-                if (string.Equals("Normal", category, StringComparison.OrdinalIgnoreCase))
-                {
-                    snacks = _snackRepository.Snacks.Where(x => x.Category.CategoryName.Equals("Normal"))
-                        .OrderBy(x => x.Name);
-                }
-                else
-                {
-                    snacks = _snackRepository.Snacks.Where(x => x.Category.CategoryName.Equals("Natural"))
-                        .OrderBy(x => x.Name);
-                }
+
+                //if (string.Equals("Normal", category, StringComparison.OrdinalIgnoreCase))
+                //{
+                //    snacks = _snackRepository.Snacks.Where(x => x.Category.CategoryName.Equals("Normal"))
+                //        .OrderBy(x => x.Name);
+                //}
+                //else
+                //{
+                //    snacks = _snackRepository.Snacks.Where(x => x.Category.CategoryName.Equals("Natural"))
+                //        .OrderBy(x => x.Name);
+                //}
+
+                snacks = _snackRepository.Snacks.
+                    Where(x => x.Category.CategoryName.Equals(category))
+                    .OrderBy(c => c.Name);
                 currentCategory = category;
             }
             var snacksListViewModel = new SnackListViewModel
