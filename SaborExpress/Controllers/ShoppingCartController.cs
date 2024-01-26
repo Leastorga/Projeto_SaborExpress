@@ -20,6 +20,7 @@ namespace SaborExpress.Controllers
         {
             var items = _shoppingCart.GetCartPurchaseItems();
             _shoppingCart.CartPurchaseItems = items;
+
             var shoppingCartVM = new ShoppingCartViewModel {
                 ShoppingCart = _shoppingCart,
                 TotalShoppingCart = _shoppingCart.GetTotalShoppingCart()    
@@ -27,7 +28,7 @@ namespace SaborExpress.Controllers
             return View(shoppingCartVM);
         }
 
-        public RedirectToActionResult AddItemToShoppingcart(int snackId)
+        public ActionResult AddItemToShoppingcart(int snackId)
         {
             var selectedItem = _snackRepository.Snacks.FirstOrDefault(p => p.SnackId == snackId);
             if (selectedItem != null)
@@ -37,7 +38,7 @@ namespace SaborExpress.Controllers
             return RedirectToAction("Index");
         }
 
-        public RedirectToActionResult RemoveItemToShoppingcart(int snackId)
+        public ActionResult RemoveItemToShoppingcart(int snackId)
         {
             var selectedItem = _snackRepository.Snacks.FirstOrDefault(p => p.SnackId == snackId);
             if (selectedItem != null)
@@ -46,5 +47,7 @@ namespace SaborExpress.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
     }
 }

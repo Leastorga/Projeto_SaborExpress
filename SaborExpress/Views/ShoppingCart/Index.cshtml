@@ -3,10 +3,10 @@
 <div class="Container">
     <div class="row">
 
-        <img src="~/Images/iconCart.png" />
+
 
         <div>
-            <h4>Your shopping cart: </h4>
+            <img src="~/Images/Full-Cart-icon.png" width="30" height="35" /><h4>Your shopping cart: </h4>
         </div>
 
         <table class="table table-bordered table-striped">
@@ -29,7 +29,11 @@
                         <td class="text-left">@item.Snack.Name</td>
                         <td class="text-right">@item.Snack.Price.ToString("c")</td>
                         <td class="text-right">
-                            <a asp-controller="ShoppingCart" asp-action="RemoveItemToShoppingcart" asp-route-snackId="@item.Snack.SnackId"><img src="~/Images/iconDump.png" />
+                            @((item.Quantity * item.Snack.Price).ToString("c"))
+                        </td>
+                        <td>
+                            <a asp-controller="ShoppingCart" asp-action="RemoveItemToShoppingcart" asp-route-snackId="@item.Snack.SnackId">
+                                <img src="~/Images/delete.png" width="10px" height="10px" />
                             </a>
                         </td>
                     </tr>
@@ -47,11 +51,11 @@
         </table>
 
         <div class="text-right">
-           <div class="btn-group">
-               <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Close Order</a>
+            <div class="btn-group">
+                <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Close Order</a>
                 &nbsp;&nbsp;&nbsp;
-               <a class="btn btn-primary" asp-controller="Snack" asp-action="List">Keep buying</a>
-           </div>
+                <a class="btn btn-primary" asp-controller="Snack" asp-action="List">Keep buying</a>
+            </div>
         </div>
     </div>
 </div>
