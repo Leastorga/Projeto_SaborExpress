@@ -31,9 +31,9 @@
                         <td class="text-right">
                             @((item.Quantity * item.Snack.Price).ToString("c"))
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a asp-controller="ShoppingCart" asp-action="RemoveItemToShoppingcart" asp-route-snackId="@item.Snack.SnackId">
-                                <img src="~/Images/delete.png" width="10px" height="10px" />
+                                <img src="~/Images/delete.png" width="15px" height="15px" />
                             </a>
                         </td>
                     </tr>
