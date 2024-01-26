@@ -24,6 +24,12 @@
                    @*  <a class="nav-link text-light" asp-area="" asp-controller="Snack" asp-action="List">Snacks</a> *@
                     <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     <a class="nav-link text-light" asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
+
+                    <form class="navbar-form navbar-right" asp-controller="Snack" asp-action="Search" method="get">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search product" name="searchString" value="@ViewData["searchString"]" />
+                        </div>
+                    </form>
                 </div>
             </div>
         </nav>

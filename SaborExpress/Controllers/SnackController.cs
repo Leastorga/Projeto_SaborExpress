@@ -57,6 +57,35 @@ namespace SaborExpress.Controllers
             var snack = _snackRepository.Snacks.FirstOrDefault(x => x.SnackId == snackId);
             return View(snack);
         }
+
+        public ViewResult Search(string searchString)
+        {
+            IEnumerable<Snack> snacks;
+            string currentCategory = string.Empty;
+
+            if(string.IsNullOrEmpty(searchString))
+            {
+                snacks = _snackRepository.Snacks.OrderBy(x => x.SnackId);
+                currentCategory = "All Snacks";
+            }
+            else
+            {
+                snacks = _snackRepository.Snacks.Where(x=>x.Name.ToLower().Contains(searchString.ToLower()));
+                if(snacks.Any())
+                {
+                    currentCategory = "Snacks";
+                }
+                else
+                {
+                    currentCategory = "No snacks were found";
+                }
+            }
+            return View("~/Views/Snack/List.cshtml", new SnackListViewModel
+            {
+                Snacks = snacks,
+                CurrentCategory = currentCategory
+            });
+        }
     }
 }
 
