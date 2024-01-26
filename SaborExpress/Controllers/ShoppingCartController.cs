@@ -28,7 +28,7 @@ namespace SaborExpress.Controllers
             return View(shoppingCartVM);
         }
 
-        public ActionResult AddItemToShoppingcart(int snackId)
+        public IActionResult AddItemToShoppingcart(int snackId)
         {
             var selectedItem = _snackRepository.Snacks.FirstOrDefault(p => p.SnackId == snackId);
             if (selectedItem != null)
@@ -38,7 +38,7 @@ namespace SaborExpress.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult RemoveItemToShoppingcart(int snackId)
+        public IActionResult RemoveItemToShoppingcart(int snackId)
         {
             var selectedItem = _snackRepository.Snacks.FirstOrDefault(p => p.SnackId == snackId);
             if (selectedItem != null)
