@@ -51,6 +51,12 @@ namespace SaborExpress.Controllers
             };
             return View(snacksListViewModel);
         }
+
+        public IActionResult Details(int snackId)
+        {
+            var snack = _snackRepository.Snacks.FirstOrDefault(x => x.SnackId == snackId);
+            return View(snack);
+        }
     }
 }
 
