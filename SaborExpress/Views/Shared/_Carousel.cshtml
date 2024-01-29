@@ -1,21 +1,19 @@
-﻿<div id="carouselLanches" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="~/images/carousel14.jpg" class="d-block w-100" alt="">
+﻿<div class="row no-gutter">
+    @{
+        string[] imgs =
+        {
+    "~/images/carousel14.jpg",
+    "~/images/carousel15.jpg",
+    "~/images/carousel16.jpg"
+    };
+    }
+
+    @foreach (var img in imgs)
+    {
+        <div class="col-xs-4 col-md-4">
+            <a class="portifolio-box" asp-action="List" asp-controller="Snack">
+                <img src="@Url.Content(img)" alt="Snacks" width="450" height="300" />
+            </a>
         </div>
-        <div class="carousel-item">
-            <img src="~/images/carousel15.jpg" class="d-block w-100" alt="">
-        </div>
-        <div class="carousel-item">
-            <img src="~/images/carousel16.jpg" class="d-block w-100" alt="">
-        </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselLanches" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselLanches" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
+    }
 </div>
