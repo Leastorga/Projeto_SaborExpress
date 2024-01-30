@@ -1,0 +1,15 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SaborExpress.ViewModels
+{
+    public class LoginViewModel
+    {
+        [Required(ErrorMessage ="Provide your name")]
+        [Display(Name ="User")]
+        public string UserName { get; set; }
+        [Required(ErrorMessage = "Provide your password")]
+        [Display(Name = "password")]
+        public string Password { get; set; }
+        public string ReturnUrl { get; set; }
+    }
+}
