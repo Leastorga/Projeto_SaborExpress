@@ -2,7 +2,7 @@
  
 <table class="table">
     <tr>
-        <td><img src="~/Images/icons8-grupo-de-usuários-96.png" alt="login" class="center-block" /></td>
+        <td><img src="~/Images/login.png" alt="login" class="center-block" /></td>
         <td>
             <div class="row">
                 <div class="col-10 col-md-10 col-lg-10">
@@ -16,7 +16,7 @@
                             <label asp-for="UserName" class="col-md-2 control-label"></label>
                             <div class="col-md-6">
                                 <input asp-for="UserName" class="form-control" />
-                                <span aps-for="UserName" class="text-danger"></span>
+                                <span asp-validation-for="UserName" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
