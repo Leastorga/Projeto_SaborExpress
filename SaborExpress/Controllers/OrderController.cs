@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SaborExpress.Models;
 using SaborExpress.Repositories.Interfaces;
 
@@ -15,11 +16,14 @@ namespace SaborExpress.Controllers
             _shoppingCart = shoppingCart;
         }
 
+        [Authorize]
         [HttpGet]
         public IActionResult Checkout()
         {
             return View();
         }
+
+        [Authorize]
         [HttpPost]
         public IActionResult Checkout(Order order)
         {

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SaborExpress.Models;
 using SaborExpress.Repositories.Interfaces;
 using SaborExpress.ViewModels;
@@ -28,6 +29,7 @@ namespace SaborExpress.Controllers
             return View(shoppingCartVM);
         }
 
+        [Authorize]
         public IActionResult AddItemToShoppingcart(int snackId)
         {
             var selectedItem = _snackRepository.Snacks.FirstOrDefault(p => p.SnackId == snackId);
@@ -38,6 +40,7 @@ namespace SaborExpress.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult RemoveItemToShoppingcart(int snackId)
         {
             var selectedItem = _snackRepository.Snacks.FirstOrDefault(p => p.SnackId == snackId);
