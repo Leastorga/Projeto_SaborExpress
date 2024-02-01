@@ -4,6 +4,7 @@ using SaborExpress.Context;
 using SaborExpress.Models;
 using SaborExpress.Repositories;
 using SaborExpress.Repositories.Interfaces;
+using SaborExpress.Services;
 
 namespace SaborExpress;
 public class Startup
@@ -35,6 +36,17 @@ public class Startup
         services.AddTransient<ISnackRepository, SnackRepository>();
         services.AddTransient<ICategoryRepository, CategoryRepository>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+
+        services.AddAuthorization(options =>
+        {
+            options.AddPolicy("Admin",
+                policy =>
+                {
+                    policy.RequireRole("Admin");
+                });
+        });
+
         services.AddTransient<IOrderRepository, OrderRepository>();
         services.AddScoped(sp => ShoppingCart.GetCart(sp));
         services.AddControllersWithViews();
@@ -46,7 +58,7 @@ public class Startup
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ISeedUserRoleInitial seedUserRoleInitial)
     {
         if (env.IsDevelopment())
         {
@@ -62,6 +74,10 @@ public class Startup
 
         app.UseStaticFiles();
         app.UseRouting();
+
+        seedUserRoleInitial.SeedRoles();
+        seedUserRoleInitial.SeedUsers();
+
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseSession();
