@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 using SaborExpress.Context;
 using SaborExpress.Models;
 using SaborExpress.Repositories;
@@ -50,6 +51,12 @@ public class Startup
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped(sp => ShoppingCart.GetCart(sp));
         services.AddControllersWithViews();
+
+        services.AddPaging(options =>
+        {
+            options.ViewName = "Bootstrap4";
+            options.PageParameterName = "pageindex";
+        });
 
         services.AddMemoryCache(); // Estamos registrando os Middlewares
         services.AddSession();
