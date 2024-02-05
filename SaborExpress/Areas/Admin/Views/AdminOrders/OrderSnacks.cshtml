@@ -1,0 +1,43 @@
+﻿@model SaborExpress.ViewModels.OrderSnackViewModel
+
+@{
+    ViewData["Title"] = "OrderSnacks";
+    decimal totalOrder = 0;
+}
+
+<h1>Order snacks</h1>
+<hr />
+
+<h3>Order : @Html.DisplayFor(model => @Model.Order.OrderId)</h3>
+<h3>Custumer:@Html.DisplayFor(model => @Model.Order.Name)</h3>
+<h3>Data : @Html.DisplayFor(model => @Model.Order.OrderDispatched)</h3>
+<h3>Delivery : @Html.DisplayFor(model => @Model.Order.OrderDeliveredTo)</h3>
+
+<table class="table">
+    @foreach (var item in @Model.Order.OrderItems)
+    {
+        totalOrder += (item.Snack.Price * item.Quantity);
+
+        <tr>
+            <td align="right">
+                <h3>@Html.DisplayFor(modelItem => item.Snack.Name)</h3>
+            </td>
+            <td align="right">
+                <img src="@item.Snack.ImageUrl" class="img-fluid" height="100" width="100" />
+            </td>
+            <td align="right">
+                <h3>@string.Format("{o:C}", item.Snack.Price)</h3>
+            </td>
+            <td align="right">
+                <h3>(@Html.DisplayFor(modelItem => item.Quantity))</h3>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="2">&nbsp;</td>
+        <td align="right">
+            <h3>Total order: @string.Format("{o:C}",@totalOrder)</h3>
+        </td>
+    </tr>
+</table>
+<a asp-action="Index" class="btn btn-outline-info">Return</a>

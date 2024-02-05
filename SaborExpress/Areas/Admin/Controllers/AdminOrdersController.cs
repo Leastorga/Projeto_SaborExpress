@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
 using SaborExpress.Context;
 using SaborExpress.Models;
+using SaborExpress.ViewModels;
 
 namespace SaborExpress.Areas.Admin.Controllers
 {
@@ -16,6 +17,27 @@ namespace SaborExpress.Areas.Admin.Controllers
         public AdminOrdersController(AppDbContext context)
         {
             _context = context;
+        }
+
+        public IActionResult OrderSnacks(int? id)
+        {
+            var order = _context.Orders
+                .Include(pd => pd.OrderItems)
+                .ThenInclude(l => l.Snack)
+                .FirstOrDefault(p => p.OrderId == id);
+
+            if (order == null)
+            {
+                Response.StatusCode = 404;
+                return View("OrderNotFound", id.Value);
+            }
+
+            OrderSnackViewModel orderSnacks = new OrderSnackViewModel()
+            {
+                Order = order,
+                OrderDetails = order.OrderItems
+            };
+            return View(orderSnacks);
         }
 
         // GET: Admin/AdminOrders
