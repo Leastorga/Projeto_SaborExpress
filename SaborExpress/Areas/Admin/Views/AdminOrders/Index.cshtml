@@ -1,5 +1,4 @@
 ﻿@model ReflectionIT.Mvc.Paging.PagingList<SaborExpress.Models.Order>
-
 @{
     ViewData["Title"] = "Index";
 }
@@ -14,9 +13,9 @@
 </form>
 
 Total Orders : @Model.TotalRecordCount
-<div>
-    <vc:pager paging-list="@Model"></vc:pager>
-</div>
+<nav aria-label="Suppliers navigation example">
+    @await this.Component.InvokeAsync("Pager", new { pagingList = this.Model })
+</nav>
 
 <p>
     <a asp-action="Create">Create New</a>

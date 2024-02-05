@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using ReflectionIT.Mvc.Paging;
 using SaborExpress.Context;
 using SaborExpress.Models;
 
@@ -19,12 +20,24 @@ namespace SaborExpress.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminSnacks
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var appDbContext = _context.Snacks.Include(s => s.Category);
+        //    return View(await appDbContext.ToListAsync());
+        //}
+        public async Task<IActionResult> Index(string filter, int pageindex = 1, string sort = "Name")
         {
-            var appDbContext = _context.Snacks.Include(s => s.Category);
-            return View(await appDbContext.ToListAsync());
-        }
+            var result = _context.Snacks.Include(l => l.Category).AsQueryable();
 
+            if (!string.IsNullOrWhiteSpace(filter))
+            {
+                result = result.Where(p => p.Name.Contains(filter));
+            }
+
+            var model = await PagingList.CreateAsync(result, 3, pageindex, sort, "Name");
+            model.RouteValue = new RouteValueDictionary { { "filter", filter } };
+            return View(model);
+        }
         // GET: Admin/AdminSnacks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -154,14 +167,14 @@ namespace SaborExpress.Areas.Admin.Controllers
             {
                 _context.Snacks.Remove(snack);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SnackExists(int id)
         {
-          return _context.Snacks.Any(e => e.SnackId == id);
+            return _context.Snacks.Any(e => e.SnackId == id);
         }
     }
 }
