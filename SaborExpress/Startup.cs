@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ReflectionIT.Mvc.Paging;
+using SaborExpress.Areas.Admin.Services;
 using SaborExpress.Context;
 using SaborExpress.Models;
 using SaborExpress.Repositories;
@@ -38,6 +39,7 @@ public class Startup
         services.AddTransient<ICategoryRepository, CategoryRepository>();
         services.AddTransient<IOrderRepository, OrderRepository>();
         services.AddScoped<ISeedUserRoleInitial, SeedUserRoleInitial>();
+        services.AddScoped<SalesServiceReport>();
 
         services.AddAuthorization(options =>
         {

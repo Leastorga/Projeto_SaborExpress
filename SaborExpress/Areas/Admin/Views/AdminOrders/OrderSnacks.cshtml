@@ -26,7 +26,7 @@
                 <img src="@item.Snack.ImageUrl" class="img-fluid" height="100" width="100" />
             </td>
             <td align="right">
-                <h3>@string.Format("{o:C}", item.Snack.Price)</h3>
+                <h3>@string.Format("{0:C}", item.Snack.Price)</h3>
             </td>
             <td align="right">
                 <h3>(@Html.DisplayFor(modelItem => item.Quantity))</h3>
@@ -36,7 +36,7 @@
     <tr>
         <td colspan="2">&nbsp;</td>
         <td align="right">
-            <h3>Total order: @string.Format("{o:C}",@totalOrder)</h3>
+            <h3>Total order: @string.Format("{0:C}",@totalOrder)</h3>
         </td>
     </tr>
 </table>
