@@ -10,7 +10,7 @@
                         <input type="file" name="files" multiple class="button btn-outline-primary" />
                     </div>
                 </div>
-                <hr />
+                <br />
                 <div class="form-group">
                     <div class="col-md-10">
                         <input type="submit" value="Upload file(s)" class="button btn-outline-primary" />
@@ -18,6 +18,7 @@
                 </div>
             </form>
         </td>
+
         <td>
             <form method="post" enctype="multipart/form-data" asp-controller="AdminImages" asp-action="GetImages">
                 <img src="~/Images/visualizar1.jpg" width="200" height="200" />
@@ -26,10 +27,10 @@
                         <p><strong>View Images in the server folder:</strong></p>
                     </div>
                 </div>
-                <hr />
+
                 <div class="form-group">
                     <div class="col-md-10">
-                        <input type="submit" value="Preview files on the server" class="button btn-outline-primary" />
+                        <input type="submit" value="Preview files on the server" class="button btn-outline-warning" />
                     </div>
                 </div>
             </form>
