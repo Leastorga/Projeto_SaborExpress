@@ -57,5 +57,35 @@ namespace SaborExpress.Areas.Admin.Controllers
             ViewBag.Files = filePathsName;
             return View(ViewData);
         }
+
+        public IActionResult GetImages()
+        {
+            FileManagerModel model = new FileManagerModel();
+            var userImagesPath = Path.Combine(_hostingEnvironment.WebRootPath, _myConfig.NameFolderImagesProducts);
+
+            DirectoryInfo dir = new DirectoryInfo(userImagesPath);
+
+            FileInfo[] files = dir.GetFiles();
+            model.PathImagesProduct = _myConfig.NameFolderImagesProducts;
+
+            if(files.Length == 0)
+            {
+                ViewData["Erro"] = $"No files found in the folder {userImagesPath}";
+            }
+
+            model.Files = files;
+            return View(model);
+        }
+
+        public IActionResult Deletefile(string fname)
+        {
+            string _imageDelete = Path.Combine(_hostingEnvironment.WebRootPath, _myConfig.NameFolderImagesProducts + "\\", fname);
+            if((System.IO.File.Exists(_imageDelete)))
+            {
+                System.IO.File.Delete(_imageDelete);
+                ViewData["Deleted"] = $"File(s) {_imageDelete} deleted successfully";
+            }
+            return View("index");
+        }
     }
 }
