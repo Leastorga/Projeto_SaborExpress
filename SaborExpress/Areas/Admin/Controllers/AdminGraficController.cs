@@ -29,7 +29,6 @@ namespace SaborExpress.Areas.Admin.Controllers
             return View();
         }
         [HttpGet]
-
         public IActionResult WeeklySales(int days)
         {
             return View();

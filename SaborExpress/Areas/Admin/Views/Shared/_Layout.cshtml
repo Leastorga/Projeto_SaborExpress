@@ -11,13 +11,27 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
-
                 <a class="navbar-brand" asp-area="" asp-controller="Admin" asp-action="Index">Admin</a>
-                <div class="navbar-collapse collapse d-sm-inline-flex">             
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex">
                     <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminSnacks" asp-action="Index">Products</a>
                     <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminCategories" asp-action="Index">Categories</a>
                     <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminOrders" asp-action="Index">Orders</a>
                     <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminSalesReports" asp-action="Index">Sales Reports</a>
+                    @* Graficos *@
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sales Charts
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="AdminGrafic" asp-action="Index">Annual Sales</a>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="AdminGrafic" asp-action="MonthlySales" asp-route-days="7 ">Monthly Sales</a>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="AdminGrafic" asp-action="WeeklySales" asp-route-days="30 ">Weekly Sales</a>
+                        </div>
+                    </div>
                     <a class="nav-link text-light" asp-area="Admin" asp-controller="AdminImages" asp-action="Index">Manage Images</a>
                 </div>
             </div>
