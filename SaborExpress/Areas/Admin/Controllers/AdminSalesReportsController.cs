@@ -20,11 +20,11 @@ namespace SaborExpress.Areas.Admin.Controllers
 
         public async Task<IActionResult> SimpleSalesReport(DateTime? minDate, DateTime? maxDate)
         {
-            if(!minDate.HasValue)
+            if (!minDate.HasValue)
             {
                 minDate = new DateTime(DateTime.Now.Year, 1, 1);
             }
-            if(!maxDate.HasValue)
+            if (!maxDate.HasValue)
             {
                 maxDate = DateTime.Now;
             }
