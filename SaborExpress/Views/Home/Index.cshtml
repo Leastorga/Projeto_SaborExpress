@@ -1,32 +1,13 @@
 ﻿@model HomeViewModel
 
-<div class="row text-center">
-    <h2>Snacks</h2>
-</div>
-<br />
-<section id="portfolio">
-    @await Html.PartialAsync("_Carousel")
-</section>
-<br />
-<section id="Contact">
-    <div class="row">
-        <div class="col-10 col-md-5 col-lg-5 offset-1" style="color:black">
-            <h4>&copy; 2024 - SaborExpress</h4>
-            <p class="text-justify">
+<partial name="_Carousel" />
 
-                Here you will find that delicious snack that makes your mouth water.
-                That tasty dessert to accompany your favorite drink.
-            </p>
-        </div>
-        <div class="col-10 col-md-5 col-lg-5 offset-1" style="color:black">
-            <h4>
-                Do you have any questions?
-            </h4>
-            <ul class="list-unstyled">
-                <li class="py-1">Av. Bueno de Andrade, 56 Setor-2 Quadra-8</li>
-                <li class="py-1"> +55- 999 9123 502</li>
-                <li class="py-1"><a href="SaborExpress@gmail.com" style="color:blue">SaborExpress</a></li>
-            </ul>
-        </div>
-    </div>
-</section>
+<h2>Favorites of the week </h2>
+<h4>Are you hungry???</h4>
+
+<div class="row">
+    @foreach (var snack in Model.FavoriteSnack)
+    {
+        <partial name="_SnackSummary" for="@snack" />
+    }
+</div>
