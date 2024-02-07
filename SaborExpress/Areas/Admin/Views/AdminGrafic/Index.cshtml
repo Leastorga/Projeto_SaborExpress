@@ -1,0 +1,58 @@
+﻿<title>
+    @ViewData["Title"] - Sales Chart
+</title>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+<script type="text/javascript">
+
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(LoadedData);
+
+    function LoadedData() {
+        $.ajax({
+            url: '@Url.Action("SnacksSales", "AdminGrafic")',
+            data: { days: 360 },
+            dataType: "json",
+            type: "GET",
+            error: function (xhr, status, error) {
+                var err = eval("(" + xhr.responseText + ")");
+                toastr.error(err.message);
+            },
+            success: function (data) {
+                SnackSalesChart(data);
+                return false;
+            }
+        });
+        return false;
+    }
+
+    function SnackSalesChart(data) {
+        var dataArray = [
+            ['Snack', 'Quantity', 'Price(R$)']
+        ];
+        $.each(data, function (i, item) {
+            dataArray.push([item.snackName, item.snacksQuantity, item.snacksTotalValue]);
+        });
+        var data = google.visualization.arrayToDataTable(dataArray);
+        var options = {
+            title: 'Snacks - Sales in the last 360 days',
+            chartArea: {
+                width: '70%'
+            },
+            colors: ['#5202b5', '#d2a828'],
+            hAxis: {
+                title: 'Total Value (in Reais)',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Snacks'
+            }
+        };
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+        return false;
+    }
+</script>

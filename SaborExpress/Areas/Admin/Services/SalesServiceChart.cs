@@ -15,13 +15,12 @@ namespace SaborExpress.Areas.Admin.Services
         public List<GraficSnack> GetSnacksSales(int days = 360)
         {
             var date = DateTime.Now.AddDays(-days);
+
             var snacks = (from pd in context.OrderDetails
                           join l in context.Snacks on pd.SnackId equals l.SnackId
                           where pd.Order.OrderDispatched >= date
-                          group pd by new
-                          {
-                              pd.SnackId, l.Name, pd.Quantity
-                          } into g
+                          group pd by new { pd.SnackId, l.Name }
+                          into g
                           select new
                           {
                               SnackName = g.Key.Name,
@@ -30,9 +29,10 @@ namespace SaborExpress.Areas.Admin.Services
                           });
 
             var list = new List<GraficSnack>();
-            foreach(var item in snacks)
+            foreach (var item in snacks)
             {
                 var snack = new GraficSnack();
+
                 snack.SnackName = item.SnackName;
                 snack.SnacksQuantity = item.SnacksQuantity;
                 snack.SnacksTotalValue = item.SnacksTotalValue;
@@ -40,5 +40,8 @@ namespace SaborExpress.Areas.Admin.Services
             }
             return list;
         }
+
     }
 }
+
+
