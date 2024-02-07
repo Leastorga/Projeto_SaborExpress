@@ -39,6 +39,12 @@
         var data = google.visualization.arrayToDataTable(dataArray);
         var options = {
             title: 'Snacks - Sales in the last 360 days',
+
+            animation: {
+                duration:3000,
+                easing:'out',
+                startup: true
+            },
             chartArea: {
                 width: '70%'
             },

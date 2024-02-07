@@ -14,7 +14,7 @@
     function LoadedData() {
         $.ajax({
             url: '@Url.Action("SnacksSales", "AdminGrafic")',
-            data: { days: 7 },
+            data: { days: 30 },
             dataType: "json",
             type: "GET",
             error: function (xhr, status, error) {
@@ -22,7 +22,7 @@
                 toastr.error(err.message);
             },
             success: function (data) {
-                SnackSalesChart(data); 
+                SnackSalesChart(data);
                 return false;
             }
         });
@@ -38,10 +38,12 @@
         });
         var data = google.visualization.arrayToDataTable(dataArray);
         var options = {
-            title: 'Snacks - Sales in the last 7 days',
-            curveType:'function',
-            legend: {position:'bottom'},
-
+            title: 'Snacks - Sales in the last 30 days',
+            animation: {
+                duration: 3000,
+                easing: 'out',
+                startup: true
+            },
             chartArea: {
                 width: '70%'
             },
@@ -54,7 +56,7 @@
                 title: 'Total Value (in Reais)'
             }
         };
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }
 </script>
